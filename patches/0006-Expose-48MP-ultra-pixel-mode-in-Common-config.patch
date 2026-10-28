@@ -1,0 +1,30 @@
+From 362943cde396ed520e1e95b246396c6d87fa82b9 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:11:45 +0530
+Subject: [PATCH] Expose 48MP ultra pixel mode in Common config
+
+Common.o0000O0() returns the rear ultra pixel photography config, whose
+first digit selects the menu entry (1 = 48M) and is empty by default, so
+the 48MP option never shows on devices without their own config class.
+Return "1:8000x6000" like ginkgo and curtana, matching violet's QCFA
+sensor dimension (org.codeaurora.qcamera3.quadra_cfa.qcfa_dimension).
+---
+ smali_classes2/com/mi/device/Common.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali_classes2/com/mi/device/Common.smali b/smali_classes2/com/mi/device/Common.smali
+index 3c0e8a7..745996c 100644
+--- a/smali_classes2/com/mi/device/Common.smali
++++ b/smali_classes2/com/mi/device/Common.smali
+@@ -762,7 +762,7 @@
+ .method public o0000O0()Ljava/lang/String;
+     .locals 0
+ 
+-    const-string p0, ""
++    const-string p0, "1:8000x6000"
+ 
+     return-object p0
+ .end method
+-- 
+2.50.1 (Apple Git-155)
+
