@@ -1,0 +1,30 @@
+From a2fb87ac859169d71239b3b2e062141e39a64a45 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:36:34 +0530
+Subject: [PATCH 09/11] Disable parallel processing
+
+Sweet's config enables parallel (algo up) processing, which creates
+sessions on the vendor.xiaomi.hardware.campostproc service through
+libmicampostproc_client. Violet's MIUI 12.5 vendor has no such service,
+so MiPostProcSessionIntf::initialize() dereferences null and the camera
+crashes as soon as it opens.
+---
+ smali_classes2/com/mi/device/Sweet.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali_classes2/com/mi/device/Sweet.smali b/smali_classes2/com/mi/device/Sweet.smali
+index edc538e..a3ce382 100644
+--- a/smali_classes2/com/mi/device/Sweet.smali
++++ b/smali_classes2/com/mi/device/Sweet.smali
+@@ -900,7 +900,7 @@
+ .method public o0O00O0o()Z
+     .locals 0
+ 
+-    const/4 p0, 0x1
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+-- 
+2.50.1 (Apple Git-155)
+

@@ -1,0 +1,33 @@
+From 1b77f821010d1557f33947bc22b30f316fc87f42 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:32:12 +0530
+Subject: [PATCH 07/11] Use Sweet config for unlisted devices
+
+Instead of the bare com.mi.device.Common defaults, fall back to the
+com.mi.device.Sweet config so devices without their own class (violet)
+get the same software features as sweet: AI scenes, auto HDR, night,
+super resolution, MFNR, beauty and makeup, super EIS, AI watermark and
+so on. Hardware specific sweet features are disabled separately.
+---
+ smali/OooO0OO/OooO0O0.smali | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/smali/OooO0OO/OooO0O0.smali b/smali/OooO0OO/OooO0O0.smali
+index cf0aac2..b2900a3 100644
+--- a/smali/OooO0OO/OooO0O0.smali
++++ b/smali/OooO0OO/OooO0O0.smali
+@@ -120,9 +120,9 @@
+ 
+     .line 4
+     :catch_0
+-    new-instance p0, Lcom/mi/device/Common;
++    new-instance p0, Lcom/mi/device/Sweet;
+ 
+-    invoke-direct {p0}, Lcom/mi/device/Common;-><init>()V
++    invoke-direct {p0}, Lcom/mi/device/Sweet;-><init>()V
+ 
+     const/4 v0, 0x0
+ 
+-- 
+2.50.1 (Apple Git-155)
+

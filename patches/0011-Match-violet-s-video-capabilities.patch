@@ -1,0 +1,56 @@
+From 90e505c5cd25e92bc02a17416eebbeab2a10a639 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:49:03 +0530
+Subject: [PATCH 11/11] Match violet's video capabilities
+
+- Limit rear slow motion to 120fps: violet's HAL only exposes 120fps
+  high speed configurations, sweet's 960fps option doesn't work.
+- Disable super EIS and movie solid video stabilization.
+- Label the ultra pixel mode in More as 48MP (index 0) instead of 50MP.
+---
+ smali_classes2/com/mi/device/Sweet.smali | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/smali_classes2/com/mi/device/Sweet.smali b/smali_classes2/com/mi/device/Sweet.smali
+index 6b4323e..4039570 100644
+--- a/smali_classes2/com/mi/device/Sweet.smali
++++ b/smali_classes2/com/mi/device/Sweet.smali
+@@ -200,7 +200,7 @@
+     .locals 0
+ 
+     .line 1
+-    sget-object p0, Lcom/mi/device/SlowMotionEnum;->OooO0o:Lcom/mi/device/SlowMotionEnum;
++    sget-object p0, Lcom/mi/device/SlowMotionEnum;->OooO0OO:Lcom/mi/device/SlowMotionEnum;
+ 
+     invoke-virtual {p0}, Lcom/mi/device/SlowMotionEnum;->OooO00o()S
+ 
+@@ -684,7 +684,7 @@
+ .method public o00o0oO()Z
+     .locals 0
+ 
+-    const/4 p0, 0x1
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+@@ -756,7 +756,7 @@
+ .method public o00oOo0o()Z
+     .locals 0
+ 
+-    const/4 p0, 0x1
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+@@ -828,7 +828,7 @@
+ .method public o00ooOoo()I
+     .locals 0
+ 
+-    const/4 p0, 0x1
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+-- 
+2.50.1 (Apple Git-155)
+

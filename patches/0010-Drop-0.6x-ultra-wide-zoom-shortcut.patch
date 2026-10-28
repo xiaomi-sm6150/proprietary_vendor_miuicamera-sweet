@@ -1,0 +1,28 @@
+From 0568f8fbdfaba61fff7f19d9e941e1b04d48c8df Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:40:43 +0530
+Subject: [PATCH 10/11] Drop 0.6x ultra wide zoom shortcut
+
+Sweet's capture zoom shortcuts include 0.6x, which switches to the
+ultra wide camera. Violet has none, so selecting it crashes. Keep the
+1x and 2x shortcuts.
+---
+ smali_classes2/com/mi/device/Sweet.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali_classes2/com/mi/device/Sweet.smali b/smali_classes2/com/mi/device/Sweet.smali
+index a3ce382..6b4323e 100644
+--- a/smali_classes2/com/mi/device/Sweet.smali
++++ b/smali_classes2/com/mi/device/Sweet.smali
+@@ -268,7 +268,7 @@
+ .method public o000Ooo()Ljava/lang/String;
+     .locals 0
+ 
+-    const-string p0, "capture:0.6:1.0:2.0"
++    const-string p0, "capture:1.0:2.0"
+ 
+     return-object p0
+ .end method
+-- 
+2.50.1 (Apple Git-155)
+
