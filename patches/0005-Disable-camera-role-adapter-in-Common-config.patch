@@ -1,0 +1,30 @@
+From 927935c1144f6115fc2c11218e891913458de5f2 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:00:07 +0530
+Subject: [PATCH 5/5] Disable camera role adapter in Common config
+
+Common.o00OO0O() selects Camera2CompatAdapterRole, which needs the
+com.xiaomi.cameraid.role.cameraId vendor tag. Older HALs such as
+violet's don't expose it, so camera capabilities end up null and the
+open fails with errno 231. Return false to use
+Camera2CompatAdapterCommon, like ginkgo and tucana do.
+---
+ smali_classes2/com/mi/device/Common.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali_classes2/com/mi/device/Common.smali b/smali_classes2/com/mi/device/Common.smali
+index 0055f14..3c0e8a7 100644
+--- a/smali_classes2/com/mi/device/Common.smali
++++ b/smali_classes2/com/mi/device/Common.smali
+@@ -1797,7 +1797,7 @@
+ .method public o00OO0O()Z
+     .locals 0
+ 
+-    const/4 p0, 0x1
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+-- 
+2.50.1 (Apple Git-155)
+
