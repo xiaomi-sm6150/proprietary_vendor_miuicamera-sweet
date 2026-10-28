@@ -1,0 +1,30 @@
+From 1f547f3bb1af3e7cc83c154d21a107e49f8842e6 Mon Sep 17 00:00:00 2001
+From: raghavt20 <raghavt20@aospa.co>
+Date: Wed, 28 Oct 2026 09:00:07 +0530
+Subject: [PATCH 4/5] Do not treat unlisted devices as incompatible
+
+When com.mi.device.<Device> is missing, MiuiCamera falls back to the
+generic com.mi.device.Common config but also sets a flag that makes
+Camera.create2OpenCamera show the "Camera version isn't compatible"
+dialog and finish. Clear that flag so devices like violet run with the
+Common config.
+---
+ smali/OooO0OO/OooO0O0.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali/OooO0OO/OooO0O0.smali b/smali/OooO0OO/OooO0O0.smali
+index 01f8faa..cf0aac2 100644
+--- a/smali/OooO0OO/OooO0O0.smali
++++ b/smali/OooO0OO/OooO0O0.smali
+@@ -124,7 +124,7 @@
+ 
+     invoke-direct {p0}, Lcom/mi/device/Common;-><init>()V
+ 
+-    const/4 v0, 0x1
++    const/4 v0, 0x0
+ 
+     .line 5
+     sput-boolean v0, LOooO0OO/OooO0O0;->OooO00o:Z
+-- 
+2.50.1 (Apple Git-155)
+
